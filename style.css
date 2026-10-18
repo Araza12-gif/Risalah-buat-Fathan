@@ -1,0 +1,387 @@
+
+:root {
+  --paper: #f8f0df;
+  --paper-dark: #ead9b8;
+  --ink: #344638;
+  --green: #405b45;
+  --gold: #ae8950;
+  --gold-light: #d8bd83;
+  --muted: #85775f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at top, #f5ead5 0%, transparent 65%),
+    #e8deca;
+  font-family: "Cormorant Garamond", serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 12px;
+  border: 1px solid #b69a69;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.background-ornament {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #c5a66b;
+  font-size: 65px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.container {
+  width: min(100% - 40px, 720px);
+  margin: auto;
+  padding: 65px 0 35px;
+  text-align: center;
+}
+
+.top-label {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  margin-bottom: 55px;
+}
+
+.envelope-area {
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope {
+  width: 280px;
+  height: 180px;
+  position: relative;
+  margin: 30px auto 28px;
+  filter: drop-shadow(0 15px 13px #67553a25);
+  transition: transform 0.5s ease;
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #e0c99d;
+  border: 1px solid var(--gold);
+}
+
+.letter-preview {
+  position: absolute;
+  width: 88%;
+  height: 145px;
+  top: -5px;
+  left: 6%;
+  background: var(--paper);
+  border: 1px solid var(--gold-light);
+  padding-top: 15px;
+  color: var(--green);
+}
+
+.mini-bismillah {
+  display: block;
+  font: 25px "Amiri", serif;
+}
+
+.letter-preview p {
+  font-style: italic;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.preview-flower {
+  color: var(--gold);
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: #d8bf8e;
+  clip-path: polygon(0 0, 50% 62%, 100% 0, 100% 100%, 0 100%);
+  border-bottom: 1px solid var(--gold);
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  background: #e9d7af;
+  clip-path: polygon(0 0, 100% 0, 50% 65%);
+  transform-origin: top;
+  transition: transform 0.8s ease;
+  z-index: 3;
+}
+
+.seal {
+  position: absolute;
+  z-index: 4;
+  top: 77px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #f9edcf;
+  font-size: 25px;
+  background: var(--green);
+  border: 2px solid var(--gold-light);
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.open-button,
+.close-button {
+  background: var(--green);
+  color: #fff5df;
+  border: 1px solid var(--gold);
+  padding: 13px 28px;
+  font: 16px "Cormorant Garamond", serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.open-button:hover,
+.close-button:hover {
+  background: #293f30;
+  transform: translateY(-2px);
+}
+
+.open-button span {
+  color: var(--gold-light);
+  margin-left: 8px;
+}
+
+.hint {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.letter {
+  text-align: left;
+  margin: 10px auto 35px;
+  animation: appear 0.8s ease both;
+}
+
+.hidden {
+  display: none;
+}
+
+.letter-border {
+  position: relative;
+  padding: 48px clamp(25px, 7vw, 65px);
+  background:
+    linear-gradient(#f9f2e4ee, #f9f2e4ee),
+    repeating-linear-gradient(0deg, #dfcba7 0 1px, transparent 1px 4px);
+  border: 1px solid var(--gold);
+  outline: 5px solid #e8d8b8;
+  box-shadow: 0 12px 35px #4c40231b;
+}
+
+.letter-border::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #c9ad78;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  z-index: 1;
+  color: var(--gold);
+  font-size: 28px;
+}
+
+.corner-tl { top: 10px; left: 15px; }
+.corner-tr { top: 10px; right: 15px; transform: scaleX(-1); }
+.corner-bl { bottom: 10px; left: 15px; transform: scaleY(-1); }
+.corner-br { bottom: 10px; right: 15px; transform: scale(-1); }
+
+.letter-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.bismillah {
+  font-family: "Amiri", serif;
+  font-size: clamp(25px, 5vw, 35px);
+  color: var(--green);
+  margin: 0 0 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--gold);
+  margin: 20px auto;
+  max-width: 250px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--gold-light);
+}
+
+.letter-subtitle {
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.letter-content {
+  font-size: 20px;
+  line-height: 1.85;
+}
+
+.greeting {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.letter-content p {
+  margin: 0 0 21px;
+}
+
+.closing {
+  padding-top: 10px;
+}
+
+.signature {
+  text-align: right;
+  margin-top: 35px;
+}
+
+.signature p {
+  margin-bottom: 0;
+  font-size: 17px;
+}
+
+.signature span {
+  font-family: "Great Vibes", cursive;
+  font-size: 35px;
+  color: var(--green);
+}
+
+.letter-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.arabic-quote {
+  font: 27px "Amiri", serif;
+  color: var(--green);
+  line-height: 1.8;
+}
+
+.translation {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.footer-note {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+.close-button {
+  display: block;
+  margin: 25px auto 0;
+  background: transparent;
+  color: var(--green);
+}
+
+.close-button:hover {
+  color: white;
+}
+
+.page-footer {
+  padding: 25px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.page-footer span {
+  font: 20px "Amiri", serif;
+  color: var(--green);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 38px);
+    padding-top: 50px;
+  }
+
+  .top-label {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+  }
+
+  .envelope {
+    transform: scale(0.9);
+    margin-bottom: 18px;
+  }
+
+  .envelope:hover {
+    transform: scale(0.9) translateY(-4px);
+  }
+
+  .letter-border {
+    padding: 40px 25px;
+  }
+
+  .letter-content {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+}
